@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+
+
+    <meta charset="UTF-8" />
+    <!-- 或者  <meta charset="UTF-8" ></meta> -->
+
+
+    <title>Thymeleaf Demo</title>
+</head>
+<body>
+<div id="member">
+<h3>用户列表</h3>
+<table border="1">
+    <tr>
+        <td>id</td>
+        <td>姓名</td>
+        <td>年龄</td>
+        <td>性别</td>
+        <td>操作</td>
+    </tr>
+    <tr v-for="member in memberList">
+        <td>{{member.id}}</td>
+        <td>{{member.username}}</td>
+        <td>{{member.password}}</td>
+        <td>{{member.authority}}</td>
+        <td>
+            <a>编辑</a>
+            <a>删除</a>
+        </td>
+    </tr>
+    <tr><a>增加</a></tr>
+</table>
+
+
+</div>
+<script language="JavaScript" src="/common/jquery-3.2.1.min.js"></script>
+<script language="JavaScript" src="/common/vue.js"></script>
+<script language="JavaScript" src="/js/member_list.js"></script>
+</body>
+</html>
