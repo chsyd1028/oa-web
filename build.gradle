@@ -30,6 +30,17 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	compile ('mysql:mysql-connector-java:6.0.6')
+
+
+	//shiro
+	compile group: 'org.apache.shiro', name: 'shiro-core', version: '1.3.2'
+	compile group: 'org.apache.shiro', name: 'shiro-web', version: '1.3.2'
+	compile group: 'org.apache.shiro', name: 'shiro-spring', version: '1.3.2'
+	compile group: 'org.apache.shiro', name: 'shiro-ehcache', version: '1.3.2'
+
+
+
+
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 
 }
