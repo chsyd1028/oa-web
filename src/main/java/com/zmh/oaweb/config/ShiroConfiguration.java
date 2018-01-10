@@ -84,14 +84,17 @@ public class ShiroConfiguration {
         return advisor;
     }
 
+    //shirofilter，使用springboot时name可以随设置，不需要context设置，
     @Bean(name = "shiroFilter")
     public ShiroFilterFactoryBean shiroFilterFactoryBean(DefaultWebSecurityManager securityManager){
         ShiroFilterFactoryBean factoryBean = new ShiroFilterFactoryBean();
         factoryBean.setSecurityManager(securityManager);
-        // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面  
+        // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
+        //登录页面（请求）
         factoryBean.setLoginUrl("/zmh/login");
-        // 登录成功后要跳转的连接  
+        // 登录成功后要跳转的连接  （请求）
         factoryBean.setSuccessUrl("/member/member_list");
+        //没有权限页面
         factoryBean.setUnauthorizedUrl("/view/common/unauthorized.html");
         loadShiroFilterChain(factoryBean);
         logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>----------shiro拦截器开启成功");
@@ -113,7 +116,12 @@ public class ShiroConfiguration {
         filterChainMap.put("/js/**", "anon");
         filterChainMap.put("/login/**", "anon");
         filterChainMap.put("/css/**", "anon");
+        filterChainMap.put("/zmh/login/check", "anon");
+        //登出的过滤器
+        filterChainMap.put("/zmh/logout", "logout");
+
         filterChainMap.put("/**", "authc");
+
 
         factoryBean.setFilterChainDefinitionMap(filterChainMap);
     }  
