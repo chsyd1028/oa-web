@@ -6,11 +6,14 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 
 /**
@@ -84,6 +87,39 @@ public class MyShiroRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        return null;
+        //1.从PrincipalCollection中获取登陆用户的信息
+        Object principal = principals.getPrimaryPrincipal();
+        logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>----------用户权限查询:" + principal);
+
+        //2.利用登陆用户的信息来获取当前用户的角色或权限（可能需要查询数据库）
+        Admin admin = adminService.queryAdminByUsername(principal.toString());
+
+        Set<String> roles = new HashSet<>();
+
+        //管理员权限
+        if (admin.getUserType() == 1){
+            roles.add("member");
+        }
+
+        //人事权限
+        if (admin.getUserType() == 2){
+            //roles.add("member");
+        }
+
+        //财务权限
+        if (admin.getUserType() == 3){
+
+        }
+
+        //普通权限
+        if (admin.getUserType() == 4){
+
+        }
+
+        //3.创建SimpleAuthorizationInfo， 并设置其rOles属性。
+        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo(roles);
+
+        //4.返回对象
+        return info;
     }
 }

@@ -1,9 +1,12 @@
 package com.zmh.oaweb.config;
 
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.Logger;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy;
+import org.apache.shiro.authc.pam.ModularRealmAuthenticator;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
@@ -75,9 +78,13 @@ public class ShiroConfiguration {
     @Bean(name = "securityManager")
     public DefaultWebSecurityManager defaultWebSecurityManager(MyShiroRealm realm){
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        //设置realm  
+        //设置realm,多个realm可以用securityManager.setRealms();
         securityManager.setRealm(realm);
         securityManager.setCacheManager(getEhCacheManager());
+        //设置认证策略
+        //ModularRealmAuthenticator authenticator = new ModularRealmAuthenticator();
+        //authenticator.setAuthenticationStrategy(new AtLeastOneSuccessfulStrategy());
+        //securityManager.setAuthenticator(authenticator);
         return securityManager;
     }
 
@@ -95,14 +102,19 @@ public class ShiroConfiguration {
         factoryBean.setSecurityManager(securityManager);
         // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
         //登录页面（请求）
-        factoryBean.setLoginUrl("/zmh/login");
+        factoryBean.setLoginUrl("/login");
         // 登录成功后要跳转的连接  （请求）
         factoryBean.setSuccessUrl("/member/member_list");
         //没有权限页面
-        factoryBean.setUnauthorizedUrl("/view/common/unauthorized.html");
+        factoryBean.setUnauthorizedUrl("/unauthorized");
         loadShiroFilterChain(factoryBean);
         logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>----------shiro拦截器开启成功");
         return factoryBean;
+    }
+
+    @Bean
+    public ShiroDialect shiroDialect() {
+        return new ShiroDialect();
     }
 
     /**
@@ -115,14 +127,18 @@ public class ShiroConfiguration {
          * org.apache.shiro.web.filter.authc.FormAuthenticationFilter */
         // anon：它对应的过滤器里面是空的,什么都没做,可以理解为不拦截  
         //authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问  
-        filterChainMap.put("/zmh/login", "anon");
+        filterChainMap.put("/login", "anon");
         filterChainMap.put("/common/**", "anon");
         filterChainMap.put("/js/**", "anon");
         filterChainMap.put("/login/**", "anon");
         filterChainMap.put("/css/**", "anon");
-        filterChainMap.put("/zmh/login/check", "anon");
+        filterChainMap.put("/login/check", "anon");
+
+        //权限分配
+        filterChainMap.put("/member/**", "roles[member]");
+
         //登出的过滤器
-        filterChainMap.put("/zmh/logout", "logout");
+        filterChainMap.put("/logout", "logout");
 
         filterChainMap.put("/**", "authc");
 

@@ -23,7 +23,7 @@ import java.util.Objects;
  * 2018/1/2
  */
 @Controller
-@RequestMapping(value = "/zmh")
+@RequestMapping(value = "/")
 public class LoginController {
 
     private Log logger = LogFactory.getLog(LoginController.class);
@@ -31,9 +31,19 @@ public class LoginController {
     @Autowired
     LoginService loginService;
 
+    /**
+     * 登陆页面
+     * @return
+     */
     @RequestMapping(value = "/login")
     public ModelAndView loginPage(){
         ModelAndView mv = new ModelAndView("/view/login/index");
+        return mv;
+    }
+
+    @RequestMapping(value = "/unauthorized")
+    public ModelAndView unauthorizedPage(){
+        ModelAndView mv = new ModelAndView("/view/common/unauthorized");
         return mv;
     }
 
@@ -53,6 +63,8 @@ public class LoginController {
 
         return "redirect:/member/member_list";
     }
+
+
 
 
 }
