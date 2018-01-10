@@ -3,6 +3,7 @@ package com.zmh.oaweb.config;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.Logger;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
@@ -52,6 +53,9 @@ public class ShiroConfiguration {
     @Bean(name = "myShiroRealm")
     public MyShiroRealm myShiroRealm(EhCacheManager ehCacheManager){
         MyShiroRealm realm = new MyShiroRealm();
+        //前台输入的为mD5加密的
+        HashedCredentialsMatcher md5 = new HashedCredentialsMatcher("MD5");
+        realm.setCredentialsMatcher(md5);
         realm.setCacheManager(ehCacheManager);
         return realm;
     }
