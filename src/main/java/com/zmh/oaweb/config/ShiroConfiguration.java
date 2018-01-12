@@ -104,7 +104,7 @@ public class ShiroConfiguration {
         //登录页面（请求）
         factoryBean.setLoginUrl("/login");
         // 登录成功后要跳转的连接  （请求）
-        factoryBean.setSuccessUrl("/member/member_list");
+        factoryBean.setSuccessUrl("/index");
         //没有权限页面
         factoryBean.setUnauthorizedUrl("/unauthorized");
         loadShiroFilterChain(factoryBean);
@@ -126,12 +126,14 @@ public class ShiroConfiguration {
         /** authc：该过滤器下的页面必须验证后才能访问，它是Shiro内置的一个拦截器  
          * org.apache.shiro.web.filter.authc.FormAuthenticationFilter */
         // anon：它对应的过滤器里面是空的,什么都没做,可以理解为不拦截  
-        //authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问  
+        //authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问
         filterChainMap.put("/login", "anon");
         filterChainMap.put("/common/**", "anon");
         filterChainMap.put("/js/**", "anon");
         filterChainMap.put("/login/**", "anon");
         filterChainMap.put("/css/**", "anon");
+        filterChainMap.put("/fonts/**", "anon");
+        filterChainMap.put ("/images/**", "anon");//////
         filterChainMap.put("/login/check", "anon");
 
         //权限分配

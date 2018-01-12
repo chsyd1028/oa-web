@@ -29,8 +29,8 @@ dependencies {
 	compile('org.mybatis.spring.boot:mybatis-spring-boot-starter:1.3.1')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
-	compile ('mysql:mysql-connector-java:6.0.6')
-
+	compile('mysql:mysql-connector-java:6.0.6')
+	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 
 	//shiro
 	compile group: 'org.apache.shiro', name: 'shiro-core', version: '1.3.2'

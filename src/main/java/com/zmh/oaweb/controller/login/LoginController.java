@@ -1,7 +1,9 @@
 package com.zmh.oaweb.controller.login;
 
 import com.zmh.oaweb.dto.ReturnDto;
+import com.zmh.oaweb.model.Admin;
 import com.zmh.oaweb.model.Member;
+import com.zmh.oaweb.service.AdminService;
 import com.zmh.oaweb.service.login.LoginService;
 import com.zmh.oaweb.util.MD5Util;
 import org.apache.commons.logging.Log;
@@ -14,8 +16,10 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.Objects;
 
 /**
@@ -31,19 +35,32 @@ public class LoginController {
     @Autowired
     LoginService loginService;
 
+    @Autowired
+    AdminService adminService;
+
     /**
      * 登陆页面
      * @return
      */
     @RequestMapping(value = "/login")
     public ModelAndView loginPage(){
-        ModelAndView mv = new ModelAndView("/view/login/index");
+        ModelAndView mv = new ModelAndView("/view/index");
         return mv;
     }
 
+    /**
+     * 没有权限页面
+     * @return
+     */
     @RequestMapping(value = "/unauthorized")
     public ModelAndView unauthorizedPage(){
         ModelAndView mv = new ModelAndView("/view/common/unauthorized");
+        return mv;
+    }
+
+    @RequestMapping(value = "/index")
+    public ModelAndView index(){
+        ModelAndView mv = new ModelAndView("/view/dashboard");
         return mv;
     }
 
@@ -60,8 +77,8 @@ public class LoginController {
                 logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>----------登陆失败:" + ae.getMessage());
             }
         }
+        return "redirect:/index";
 
-        return "redirect:/member/member_list";
     }
 
 
