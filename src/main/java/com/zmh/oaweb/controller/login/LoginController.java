@@ -1,11 +1,7 @@
 package com.zmh.oaweb.controller.login;
 
-import com.zmh.oaweb.dto.ReturnDto;
-import com.zmh.oaweb.model.Admin;
-import com.zmh.oaweb.model.Member;
 import com.zmh.oaweb.service.AdminService;
 import com.zmh.oaweb.service.login.LoginService;
-import com.zmh.oaweb.util.MD5Util;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.ibatis.annotations.Param;
@@ -17,11 +13,9 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.Objects;
 
 /**
@@ -62,7 +56,7 @@ public class LoginController {
 
     @RequestMapping(value = "/index")
     public ModelAndView index(){
-        ModelAndView mv = new ModelAndView("/dashboard");
+        ModelAndView mv = new ModelAndView("menu");
         return mv;
     }
 
