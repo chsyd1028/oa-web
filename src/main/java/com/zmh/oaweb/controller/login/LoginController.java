@@ -46,7 +46,7 @@ public class LoginController {
      */
     @RequestMapping(value = "/login")
     public ModelAndView loginPage1(){
-        ModelAndView mv = new ModelAndView("/view/index");
+        ModelAndView mv = new ModelAndView("/index");
         return mv;
     }
 
@@ -56,13 +56,13 @@ public class LoginController {
      */
     @RequestMapping(value = "/unauthorized")
     public ModelAndView unauthorizedPage(){
-        ModelAndView mv = new ModelAndView("/view/common/unauthorized");
+        ModelAndView mv = new ModelAndView("/common/unauthorized");
         return mv;
     }
 
     @RequestMapping(value = "/index")
     public ModelAndView index(){
-        ModelAndView mv = new ModelAndView("/view/dashboard");
+        ModelAndView mv = new ModelAndView("/dashboard");
         return mv;
     }
 

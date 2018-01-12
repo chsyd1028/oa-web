@@ -31,6 +31,6 @@ public class MemberController {
 
     @RequestMapping(value = "/member_list")
     public String memberList(){
-        return "/view/member_list";
+        return "/member_list";
     }
 }
