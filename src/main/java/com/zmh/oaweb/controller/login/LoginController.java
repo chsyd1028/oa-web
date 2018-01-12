@@ -11,6 +11,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Objects;
 
@@ -43,7 +45,7 @@ public class LoginController {
      * @return
      */
     @RequestMapping(value = "/login")
-    public ModelAndView loginPage(){
+    public ModelAndView loginPage1(){
         ModelAndView mv = new ModelAndView("/view/index");
         return mv;
     }
@@ -65,7 +67,19 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/login/check")
-    public String login(@Param("username") String username, @Param("password") String password){
+    public ModelAndView login(@Param("username") String username, @Param("password") String password, HttpServletRequest request){
+        ModelAndView mav = new ModelAndView("redirect:/login");
+
+        if (Objects.equals("", username) || Objects.isNull(username)){
+            request.getSession().setAttribute("message", "请输入用户名");
+            return mav;
+        }
+
+        if (Objects.equals("", password) || Objects.isNull(password)){
+            request.getSession().setAttribute("message", "请输入密码");
+            return mav;
+        }
+
         Subject currentUser = SecurityUtils.getSubject();
 
         if (!currentUser.isAuthenticated()){
@@ -73,11 +87,21 @@ public class LoginController {
             token.setRememberMe(true);
             try {
                 currentUser.login(token);
-            }catch (AuthenticationException ae){
+            }catch (IncorrectCredentialsException ae){
+                logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>----------登陆失败:密码错误" + ae.getMessage());
+                request.getSession().setAttribute("message", "密码错误");
+                return mav;
+            }
+            catch (AuthenticationException ae){
                 logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>----------登陆失败:" + ae.getMessage());
+
+                request.getSession().setAttribute("message", ae.getMessage());
+                return mav;
             }
         }
-        return "redirect:/index";
+
+        mav = new ModelAndView("redirect:/index");
+        return mav;
 
     }
 

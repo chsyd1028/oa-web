@@ -4,7 +4,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>登录页面_AmaAdmin后台管理系统模板 - 源码之家</title>
+<title>企业管理系统</title>
+<link rel="shortcut icon" href="/images/titlelogo.png" />
 <link rel="stylesheet" href="/css/style.default.css" type="text/css" />
 <script type="text/javascript" src="/js/plugins/jquery-1.7.min.js"></script>
 <script type="text/javascript" src="/js/plugins/jquery-ui-1.8.16.custom.min.js"></script>
@@ -34,21 +35,10 @@
             </div><!--logo-->
             
             <br clear="all" /><br />
-            
-            <div class="nousername">
-				<div class="loginmsg" id="loginmsg">请输入用户名.</div>
-            </div><!--nousername-->
-            
-            <!--<div class="nopassword">-->
-				<!--<div class="loginmsg">密码不正确.</div>-->
-                <!--<div class="loginf">-->
-                    <!--<div class="thumb"><img alt="" src="images/thumbs/avatar1.png" /></div>-->
-                    <!--<div class="userlogged">-->
-                        <!--<h4></h4>-->
-                        <!--<a href="index.html">Not <span></span>?</a> -->
-                    <!--</div>-->
-                <!--</div>&lt;!&ndash;loginf&ndash;&gt;-->
-            <!--</div>&lt;!&ndash;nopassword&ndash;&gt;-->
+
+            <div class="nousername" th:style="${session.message !=null ? '' : 'display: none'}">
+                <div class="loginmsg" th:text="${session.message}"></div>
+            </div>
             
             <form id="login" method="post" action="/login/check">
             	
