@@ -189,7 +189,9 @@ body.withmenucoll2 { background-position: 35px 0; } /* with menu style 2 in coll
 	border-radius: 0 0 2px 0; background: url(../images/default/searchbutton.png) no-repeat 0 0; width: 38px; height: 37px; vertical-align: middle;
 }
 
-.topheader .right { position: absolute; top: 10px; right: 10px; }
+.topheader .right { position: absolute; top: 20px; right: 50px; }
+.topheader .right span {
+	color: #ffffff;}
 
 .notification { float: left; position: relative; }
 .notification a.count { 
@@ -256,7 +258,7 @@ body.withmenucoll2 { background-position: 35px 0; } /* with menu style 2 in coll
 
 
 .userinfo { 
-	padding: 6px 18px 6px 6px; background: #32415a url(../images/default/userinfoarrow.png) no-repeat right center; -moz-border-radius: 2px; 
+	padding: 6px 18px 6px 6px; background: #32415a url(../images/default/userinfoarrow.png) no-repeat right center; -moz-border-radius: 2px;
 	-webkit-border-radius: 2px; border-radius: 2px; -moz-box-shadow: inset 1px 1px 2px #2b384e; float: left; border-bottom: 1px solid #445775;
 	-webkit-box-shadow: inset 1px 1px 2px #2b384e; box-shadow: inset 1px 1px 2px #2b384e; cursor: pointer;
 }

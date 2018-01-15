@@ -4,11 +4,13 @@ import com.zmh.oaweb.model.Admin;
 import com.zmh.oaweb.service.AdminService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashSet;
@@ -67,6 +69,7 @@ public class MyShiroRealm extends AuthorizingRealm {
         String realmName = admin.getRealName();
         //4.盐值,不用了
 
+        SecurityUtils.getSubject().getSession().setAttribute("admin", admin);
 
         SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(principal, credentials, realmName);
 

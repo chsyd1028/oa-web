@@ -16,6 +16,7 @@
     <script type="text/javascript" src=" /js/plugins/jquery.flot.resize.min.js"></script>
     <script type="text/javascript" src=" /js/plugins/jquery.slimscroll.js"></script>
     <script type="text/javascript" src=" /js/custom/general.js"></script>
+    <script language="JavaScript" src="/common/vue.js"></script>
 
     <!--[if lte IE 8]>
     <script language="javascript" type="text/javascript" src=" /js/plugins/excanvas.min.js"></script>
@@ -53,34 +54,13 @@
             <!--<div class="notification">
                 <a class="count" href="ajax/notifications.html"><span>9</span></a>
             </div>-->
-            <div class="userinfo">
-                <img src="images/thumbs/avatar.png" alt="" />
-                <span>管理员</span>
-            </div><!--userinfo-->
+                <span>用户:</span>
+                <span><shiro:principal property="realName"> </shiro:principal></span>
+            &nbsp;&nbsp;&nbsp;
+                <a href="/logout">安全退出</a>
+            <!--userinfo-->
 
-            <div class="userinfodrop">
-                <div class="avatar">
-                    <a href=""><img src="images/thumbs/avatarbig.png" alt="" /></a>
-                    <div class="changetheme">
-                        切换主题: <br />
-                        <a class="default"></a>
-                        <a class="blueline"></a>
-                        <a class="greenline"></a>
-                        <a class="contrast"></a>
-                        <a class="custombg"></a>
-                    </div>
-                </div><!--avatar-->
-                <div class="userdata">
-                    <h4><shiro:principal property="realName"> </shiro:principal></h4>
-                    <span class="email">youremail@yourdomain.com</span>
-                    <ul>
-                        <li><a href="editprofile.html">编辑资料</a></li>
-                        <li><a href="accountsettings.html">账号设置</a></li>
-                        <li><a href="help.html">帮助</a></li>
-                        <li><a href="/logout">安全退出</a></li>
-                    </ul>
-                </div><!--userdata-->
-            </div><!--userinfodrop-->
+
         </div><!--right-->
     </div><!--topheader-->
 
@@ -115,47 +95,14 @@
 
     <br/>
 
-    <div class="vernav2 iconmenu">
+    <div class="vernav">
         <ul>
-            <li><a href="#formsub" class="editor">表单提交</a>
-                <span class="arrow"></span>
-                <ul id="formsub">
-                    <li><a href="forms.html">基础表单</a></li>
-                    <li><a href="wizard.html">表单验证</a></li>
-                    <li><a href="editor.html">编辑器</a></li>
-                </ul>
-            </li>
-            <!--<li><a href="filemanager.html" class="gallery">文件管理</a></li>-->
-            <li><a href="elements.html" class="elements">网页元素</a></li>
-            <li><a href="widgets.html" class="widgets">网页插件</a></li>
-            <li><a href="calendar.html" class="calendar">日历事件</a></li>
-            <li><a href="support.html" class="support">客户支持</a></li>
-            <li><a href="typography.html" class="typo">文字排版</a></li>
-            <li><a href="tables.html" class="tables">数据表格</a></li>
-            <li><a href="buttons.html" class="buttons">按钮 &amp; 图标</a></li>
-            <li><a href="#error" class="error">错误页面</a>
-                <span class="arrow"></span>
-                <ul id="error">
-                    <li><a href="notfound.html">404错误页面</a></li>
-                    <li><a href="forbidden.html">403错误页面</a></li>
-                    <li><a href="internal.html">500错误页面</a></li>
-                    <li><a href="offline.html">503错误页面</a></li>
-                </ul>
-            </li>
-            <li><a href="#addons" class="addons">其他页面</a>
-                <span class="arrow"></span>
-                <ul id="addons">
-                    <li><a href="newsfeed.html">新闻订阅</a></li>
-                    <li><a href="profile.html">资料页面</a></li>
-                    <li><a href="productlist.html">产品列表</a></li>
-                    <li><a href="photo.html">图片视频分享</a></li>
-                    <li><a href="gallery.html">相册</a></li>
-                    <li><a href="invoice.html">购物车</a></li>
-                </ul>
-            </li>
+            <li class="current"><a href="manageblog.html" class="editor">基本资料</a></li>
+            <li><a href="newpost.html">工作安排</a></li>
+            <li><a href="">工资查询</a></li>
+            <li><a href="">审批中心</a></li>
         </ul>
         <a class="togglemenu"></a>
-        <br /><br />
     </div><!--leftmenu-->
 
     <div class="centercontent" >
