@@ -138,6 +138,8 @@ public class ShiroConfiguration {
 
         //权限分配
         filterChainMap.put("/member/**", "roles[member]");
+        filterChainMap.put("/employee/**", "roles[employee]");
+        filterChainMap.put("/asset/**", "roles[asset]");
 
         //登出的过滤器
         filterChainMap.put("/logout", "logout");

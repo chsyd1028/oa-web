@@ -1,5 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -33,14 +35,14 @@
 <div class="bodywrapper">
     <div class="topheader">
         <div class="left">
-            <h1 class="logo">Ama.<span>Admin</span></h1>
+            <h1 class="logo">Zmh.<span>---</span></h1>
             <span class="slogan">后台管理系统</span>
 
             <div class="search">
-                <form action="" method="post">
-                    <input type="text" name="keyword" id="keyword" value="请输入" />
-                    <button class="submitbutton"></button>
-                </form>
+                <!--<form action="" method="post">-->
+                    <!--<input type="text" name="keyword" id="keyword" value="请输入" />-->
+                    <!--<button class="submitbutton"></button>-->
+                <!--</form>-->
             </div><!--search-->
 
             <br clear="all" />
@@ -69,7 +71,7 @@
                     </div>
                 </div><!--avatar-->
                 <div class="userdata">
-                    <h4>Juan</h4>
+                    <h4><shiro:principal property="realName"> </shiro:principal></h4>
                     <span class="email">youremail@yourdomain.com</span>
                     <ul>
                         <li><a href="editprofile.html">编辑资料</a></li>
@@ -85,26 +87,33 @@
 
     <div class="header">
         <ul class="headermenu">
-            <li class="current"><a href="dashboard.html"><span class="icon icon-flatscreen"></span>首页</a></li>
-            <li><a href="manageblog.html"><span class="icon icon-pencil"></span>博客管理</a></li>
-            <li><a href="messages.html"><span class="icon icon-message"></span>查看消息</a></li>
-            <li><a href="reports.html"><span class="icon icon-chart"></span>统计报表</a></li>
+
+            <li class="current"><a href="dashboard.html"><span class="icon icon-flatscreen"></span>个人中心</a></li>
+            <shiro:hasRole name="employee">
+                <li><a href="manageblog.html"><span class="icon icon-pencil"></span>人员管理</a></li>
+            </shiro:hasRole>
+            <shiro:hasRole name="asset">
+                <li><a href="messages.html"><span class="icon icon-message"></span>财务管理</a></li>
+            </shiro:hasRole>
+            <li><a href="reports.html"><span class="icon icon-chart"></span>公告中心</a></li>
         </ul>
 
-        <div class="headerwidget">
-            <div class="earnings">
-                <div class="one_half">
-                    <h4>Today's Earnings</h4>
-                    <h2>$640.01</h2>
-                </div><!--one_half-->
-                <div class="one_half last alignright">
-                    <h4>Current Rate</h4>
-                    <h2>53%</h2>
-                </div><!--one_half last-->
-            </div><!--earnings-->
-        </div><!--headerwidget-->
+        <!--<div class="headerwidget">-->
+            <!--<div class="earnings">-->
+                <!--<div class="one_half">-->
+                    <!--<h4>Today's Earnings</h4>-->
+                    <!--<h2>$640.01</h2>-->
+                <!--</div>&lt;!&ndash;one_half&ndash;&gt;-->
+                <!--<div class="one_half last alignright">-->
+                    <!--<h4>Current Rate</h4>-->
+                    <!--<h2>53%</h2>-->
+                <!--</div>&lt;!&ndash;one_half last&ndash;&gt;-->
+            <!--</div>&lt;!&ndash;earnings&ndash;&gt;-->
+        <!--</div>&lt;!&ndash;headerwidget&ndash;&gt;-->
 
     </div><!--header-->
+
+    <br/>
 
     <div class="vernav2 iconmenu">
         <ul>

@@ -59,12 +59,12 @@ public class MyShiroRealm extends AuthorizingRealm {
         //6.根据用户的情况， 来构建AuthenticationInfo对象并返回， 通常使用的实现类为：SimpleAuthenticationInfo
         //以下信息是从数据库中获取的
         //1.principal:认证的实体信息，可以是username，也可以是数表对应的实体类对象
-        Object principal = username;
+        Object principal = admin;
         //2.creadentials： 密码
         //String pw = MD5Util.string2MD5("123456");
         Object credentials = admin.getUserPwd();
         //3. realName: 当前对象的name，调用弗雷的getName()方法即可
-        String realmName = getName();
+        String realmName = admin.getRealName();
         //4.盐值,不用了
 
 
@@ -92,23 +92,26 @@ public class MyShiroRealm extends AuthorizingRealm {
         logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>----------用户权限查询:" + principal);
 
         //2.利用登陆用户的信息来获取当前用户的角色或权限（可能需要查询数据库）
-        Admin admin = adminService.queryAdminByUsername(principal.toString());
+        Admin admin = (Admin) principal;
 
         Set<String> roles = new HashSet<>();
 
         //管理员权限
         if (admin.getUserType() == 1){
             roles.add("member");
+            roles.add("employee");
+            roles.add("asset");
         }
 
         //人事权限
         if (admin.getUserType() == 2){
-            //roles.add("member");
+            roles.add("member");
+            roles.add("employee");
         }
 
         //财务权限
         if (admin.getUserType() == 3){
-
+            roles.add("asset");
         }
 
         //普通权限

@@ -45,6 +45,7 @@ dependencies {
 	compile group: 'org.apache.shiro', name: 'shiro-web', version: '1.3.2'
 	compile group: 'org.apache.shiro', name: 'shiro-spring', version: '1.3.2'
 	compile group: 'org.apache.shiro', name: 'shiro-ehcache', version: '1.3.2'
+	//标签库
 	compile group: 'com.github.theborakompanioni', name: 'thymeleaf-extras-shiro', version: '1.2.1'
 
 
