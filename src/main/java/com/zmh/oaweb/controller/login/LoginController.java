@@ -1,5 +1,6 @@
 package com.zmh.oaweb.controller.login;
 
+import com.zmh.oaweb.model.Admin;
 import com.zmh.oaweb.service.AdminService;
 import com.zmh.oaweb.service.login.LoginService;
 import org.apache.commons.logging.Log;
@@ -56,7 +57,7 @@ public class LoginController {
 
     @RequestMapping(value = "/index")
     public ModelAndView index(){
-        ModelAndView mv = new ModelAndView("menu");
+        ModelAndView mv = new ModelAndView("personal_info");
         return mv;
     }
 
@@ -93,6 +94,11 @@ public class LoginController {
                 return mav;
             }
         }
+
+        Admin admin = adminService.queryAdminByUsername(username);
+        request.getSession().setAttribute("adminId", admin.getId());
+        request.getSession().setAttribute("departmentId", admin.getDepartmentId());
+        request.getSession().setAttribute("jobId", admin.getJobId());
 
         mav = new ModelAndView("redirect:/index");
         return mav;

@@ -35,6 +35,21 @@ public class Admin implements Serializable {
     private Integer userType;
 
     /**
+     * 部门名称
+     */
+    private String departmentName;
+
+    /**
+     * 职位id
+     */
+    private Integer jobId;
+
+    /**
+     * 职位名称
+     */
+    private String jobName;
+
+    /**
      * 是否删除 0=否 1=是
      */
     private Boolean isDel;
@@ -109,6 +124,30 @@ public class Admin implements Serializable {
         this.userType = userType;
     }
 
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
+    public Integer getJobId() {
+        return jobId;
+    }
+
+    public void setJobId(Integer jobId) {
+        this.jobId = jobId;
+    }
+
+    public String getJobName() {
+        return jobName;
+    }
+
+    public void setJobName(String jobName) {
+        this.jobName = jobName;
+    }
+
     public Boolean getIsDel() {
         return isDel;
     }
@@ -167,6 +206,9 @@ public class Admin implements Serializable {
             && (this.getUserPwd() == null ? other.getUserPwd() == null : this.getUserPwd().equals(other.getUserPwd()))
             && (this.getRealName() == null ? other.getRealName() == null : this.getRealName().equals(other.getRealName()))
             && (this.getUserType() == null ? other.getUserType() == null : this.getUserType().equals(other.getUserType()))
+            && (this.getDepartmentName() == null ? other.getDepartmentName() == null : this.getDepartmentName().equals(other.getDepartmentName()))
+            && (this.getJobId() == null ? other.getJobId() == null : this.getJobId().equals(other.getJobId()))
+            && (this.getJobName() == null ? other.getJobName() == null : this.getJobName().equals(other.getJobName()))
             && (this.getIsDel() == null ? other.getIsDel() == null : this.getIsDel().equals(other.getIsDel()))
             && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
             && (this.getLastLoginTime() == null ? other.getLastLoginTime() == null : this.getLastLoginTime().equals(other.getLastLoginTime()))
@@ -184,6 +226,9 @@ public class Admin implements Serializable {
         result = prime * result + ((getUserPwd() == null) ? 0 : getUserPwd().hashCode());
         result = prime * result + ((getRealName() == null) ? 0 : getRealName().hashCode());
         result = prime * result + ((getUserType() == null) ? 0 : getUserType().hashCode());
+        result = prime * result + ((getDepartmentName() == null) ? 0 : getDepartmentName().hashCode());
+        result = prime * result + ((getJobId() == null) ? 0 : getJobId().hashCode());
+        result = prime * result + ((getJobName() == null) ? 0 : getJobName().hashCode());
         result = prime * result + ((getIsDel() == null) ? 0 : getIsDel().hashCode());
         result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
         result = prime * result + ((getLastLoginTime() == null) ? 0 : getLastLoginTime().hashCode());
@@ -204,6 +249,9 @@ public class Admin implements Serializable {
         sb.append(", userPwd=").append(userPwd);
         sb.append(", realName=").append(realName);
         sb.append(", userType=").append(userType);
+        sb.append(", departmentName=").append(departmentName);
+        sb.append(", jobId=").append(jobId);
+        sb.append(", jobName=").append(jobName);
         sb.append(", isDel=").append(isDel);
         sb.append(", status=").append(status);
         sb.append(", lastLoginTime=").append(lastLoginTime);

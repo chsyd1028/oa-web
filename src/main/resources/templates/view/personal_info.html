@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="common/layout">
+<body>
+<div th:fragment="content" th:remove="tag" >
+
+    <script language="JavaScript" src="/common/vue.js"></script>
+
+    <div id="personal_info">
+
+        <div class="pageheader notab">
+            <h1 class="pagetitle">职工信息</h1>
+            <span class="pagedesc">个人基本信息 职工联系方式 工作岗位信息 </span>
+
+        </div><!--pageheader-->
+
+        <div class="contentwrapper">
+
+            <div v-if="personalInfo !=null">
+
+            <div class="contenttitle2">
+                <h3>基本信息</h3>
+            </div>
+            <br />
+            <form class="stdform stdform2" action="" method="post">
+                <p>
+                    <label>员工编号</label>
+                    <span class="field">
+                            {{personalInfo.employeeNumber}}
+                    </span><!--field-->
+                </p>
+                <p>
+                    <label>姓名</label>
+                    <span class="field">
+                            {{personalInfo.name}}
+                    </span><!--field-->
+                </p>
+                <p>
+                    <label>性别</label>
+                    <span class="field">
+                            <span v-if="personalInfo.sex == 0">女</span>
+                            <span v-if="personalInfo.sex == 1">男</span>
+                    </span><!--field-->
+                </p>
+                <p>
+                    <label>年龄</label>
+                    <span class="field">
+                            {{personalInfo.age}}
+                    </span><!--field-->
+                </p>
+                <p>
+                    <label>生日</label>
+                    <span class="field">
+                            {{personalInfo.birthday}}
+                    </span><!--field-->
+                </p>
+                <p>
+                    <label>身份证号</label>
+                    <span class="field">
+                            {{personalInfo.idcardNumber}}
+                    </span><!--field-->
+                </p>
+
+            </form><br/>
+
+            <div class="contenttitle2">
+                <h3>联系方式</h3>
+            </div>
+            <br />
+            <form class="stdform stdform2" action="" method="post">
+                <p>
+                    <label>电话号码</label>
+                    <span class="field">
+                            {{personalInfo.mobile}}
+                    </span><!--field-->
+                </p>
+                <p>
+                    <label>e-mail</label>
+                    <span class="field">
+                            {{personalInfo.email}}
+                    </span><!--field-->
+                </p>
+                <p>
+                    <label>qq</label>
+                    <span class="field">
+                            {{personalInfo.qq}}
+                    </span><!--field-->
+                </p>
+                <p>
+                    <label>地址</label>
+                    <span class="field">
+                            {{personalInfo.address}}
+                    </span><!--field-->
+                </p>
+            </form><br/>
+
+            <div class="contenttitle2">
+                <h3>工作岗位</h3>
+            </div>
+            <br />
+            <form class="stdform stdform2" action="" method="post">
+                <p>
+                    <label>所属部门</label>
+                    <span class="field">
+                            {{departmentInfo.departmentName}}
+                    </span><!--field-->
+                </p>
+                <p>
+                    <label>工作岗位</label>
+                    <span class="field">
+                            {{departmentInfo.jobName}}
+                    </span><!--field-->
+                </p>
+                <p>
+                    <label>工作内容</label>
+                    <span class="field">
+                            {{departmentInfo.postFunction}}
+                    </span><!--field-->
+                </p>
+                <p>
+                    <label>入职日期</label>
+                    <span class="field">
+                            {{personalInfo.createTime}}
+                    </span><!--field-->
+                </p>
+
+            </form>
+            </div>
+
+            <div v-if="personalInfo == null">
+                暂无数据
+            </div>
+
+        </div>
+
+        <br clear="all" />
+
+    </div>
+
+    <script language="JavaScript" src="/js/personal_info.js"></script>
+</div>
+
+
+
+</body>
+</html>

@@ -8,6 +8,9 @@
     <result column="user_pwd" jdbcType="VARCHAR" property="userPwd" />
     <result column="real_name" jdbcType="VARCHAR" property="realName" />
     <result column="user_type" jdbcType="INTEGER" property="userType" />
+    <result column="department_name" jdbcType="VARCHAR" property="departmentName" />
+    <result column="job_id" jdbcType="INTEGER" property="jobId" />
+    <result column="job_name" jdbcType="VARCHAR" property="jobName" />
     <result column="is_del" jdbcType="BIT" property="isDel" />
     <result column="status" jdbcType="BIT" property="status" />
     <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
@@ -73,8 +76,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, department_id, user_name, user_pwd, real_name, user_type, is_del, status, last_login_time, 
-    create_time, update_time
+    id, department_id, user_name, user_pwd, real_name, user_type, department_name, job_id, 
+    job_name, is_del, status, last_login_time, create_time, update_time
   </sql>
   <select id="selectByExample" parameterType="com.zmh.oaweb.model.AdminExample" resultMap="BaseResultMap">
     select
@@ -119,11 +122,13 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into admin (department_id, user_name, user_pwd, 
-      real_name, user_type, is_del, 
+      real_name, user_type, department_name, 
+      job_id, job_name, is_del, 
       status, last_login_time, create_time, 
       update_time)
     values (#{departmentId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userPwd,jdbcType=VARCHAR}, 
-      #{realName,jdbcType=VARCHAR}, #{userType,jdbcType=INTEGER}, #{isDel,jdbcType=BIT}, 
+      #{realName,jdbcType=VARCHAR}, #{userType,jdbcType=INTEGER}, #{departmentName,jdbcType=VARCHAR}, 
+      #{jobId,jdbcType=INTEGER}, #{jobName,jdbcType=VARCHAR}, #{isDel,jdbcType=BIT}, 
       #{status,jdbcType=BIT}, #{lastLoginTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP})
   </insert>
@@ -147,6 +152,15 @@
       </if>
       <if test="userType != null">
         user_type,
+      </if>
+      <if test="departmentName != null">
+        department_name,
+      </if>
+      <if test="jobId != null">
+        job_id,
+      </if>
+      <if test="jobName != null">
+        job_name,
       </if>
       <if test="isDel != null">
         is_del,
@@ -179,6 +193,15 @@
       </if>
       <if test="userType != null">
         #{userType,jdbcType=INTEGER},
+      </if>
+      <if test="departmentName != null">
+        #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobId != null">
+        #{jobId,jdbcType=INTEGER},
+      </if>
+      <if test="jobName != null">
+        #{jobName,jdbcType=VARCHAR},
       </if>
       <if test="isDel != null">
         #{isDel,jdbcType=BIT},
@@ -224,6 +247,15 @@
       <if test="record.userType != null">
         user_type = #{record.userType,jdbcType=INTEGER},
       </if>
+      <if test="record.departmentName != null">
+        department_name = #{record.departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobId != null">
+        job_id = #{record.jobId,jdbcType=INTEGER},
+      </if>
+      <if test="record.jobName != null">
+        job_name = #{record.jobName,jdbcType=VARCHAR},
+      </if>
       <if test="record.isDel != null">
         is_del = #{record.isDel,jdbcType=BIT},
       </if>
@@ -252,6 +284,9 @@
       user_pwd = #{record.userPwd,jdbcType=VARCHAR},
       real_name = #{record.realName,jdbcType=VARCHAR},
       user_type = #{record.userType,jdbcType=INTEGER},
+      department_name = #{record.departmentName,jdbcType=VARCHAR},
+      job_id = #{record.jobId,jdbcType=INTEGER},
+      job_name = #{record.jobName,jdbcType=VARCHAR},
       is_del = #{record.isDel,jdbcType=BIT},
       status = #{record.status,jdbcType=BIT},
       last_login_time = #{record.lastLoginTime,jdbcType=TIMESTAMP},
@@ -279,6 +314,15 @@
       <if test="userType != null">
         user_type = #{userType,jdbcType=INTEGER},
       </if>
+      <if test="departmentName != null">
+        department_name = #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobId != null">
+        job_id = #{jobId,jdbcType=INTEGER},
+      </if>
+      <if test="jobName != null">
+        job_name = #{jobName,jdbcType=VARCHAR},
+      </if>
       <if test="isDel != null">
         is_del = #{isDel,jdbcType=BIT},
       </if>
@@ -304,6 +348,9 @@
       user_pwd = #{userPwd,jdbcType=VARCHAR},
       real_name = #{realName,jdbcType=VARCHAR},
       user_type = #{userType,jdbcType=INTEGER},
+      department_name = #{departmentName,jdbcType=VARCHAR},
+      job_id = #{jobId,jdbcType=INTEGER},
+      job_name = #{jobName,jdbcType=VARCHAR},
       is_del = #{isDel,jdbcType=BIT},
       status = #{status,jdbcType=BIT},
       last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
