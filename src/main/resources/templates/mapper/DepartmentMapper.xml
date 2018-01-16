@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zmh.oaweb.mapper.DepartmentMapper">
+  <resultMap id="BaseResultMap" type="com.zmh.oaweb.model.Department">
+    <id column="job_id" jdbcType="INTEGER" property="jobId" />
+    <id column="department_id" jdbcType="INTEGER" property="departmentId" />
+    <result column="department_name" jdbcType="VARCHAR" property="departmentName" />
+    <result column="job_name" jdbcType="VARCHAR" property="jobName" />
+    <result column="post_function" jdbcType="VARCHAR" property="postFunction" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    job_id, department_id, department_name, job_name, post_function, create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.zmh.oaweb.model.DepartmentExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from department
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.zmh.oaweb.model.DepartmentKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from department
+    where job_id = #{jobId,jdbcType=INTEGER}
+      and department_id = #{departmentId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.zmh.oaweb.model.DepartmentKey">
+    delete from department
+    where job_id = #{jobId,jdbcType=INTEGER}
+      and department_id = #{departmentId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zmh.oaweb.model.DepartmentExample">
+    delete from department
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zmh.oaweb.model.Department">
+    insert into department (job_id, department_id, department_name, 
+      job_name, post_function, create_time
+      )
+    values (#{jobId,jdbcType=INTEGER}, #{departmentId,jdbcType=INTEGER}, #{departmentName,jdbcType=VARCHAR}, 
+      #{jobName,jdbcType=VARCHAR}, #{postFunction,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zmh.oaweb.model.Department">
+    insert into department
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="jobId != null">
+        job_id,
+      </if>
+      <if test="departmentId != null">
+        department_id,
+      </if>
+      <if test="departmentName != null">
+        department_name,
+      </if>
+      <if test="jobName != null">
+        job_name,
+      </if>
+      <if test="postFunction != null">
+        post_function,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="jobId != null">
+        #{jobId,jdbcType=INTEGER},
+      </if>
+      <if test="departmentId != null">
+        #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="departmentName != null">
+        #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobName != null">
+        #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="postFunction != null">
+        #{postFunction,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zmh.oaweb.model.DepartmentExample" resultType="java.lang.Long">
+    select count(*) from department
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update department
+    <set>
+      <if test="record.jobId != null">
+        job_id = #{record.jobId,jdbcType=INTEGER},
+      </if>
+      <if test="record.departmentId != null">
+        department_id = #{record.departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.departmentName != null">
+        department_name = #{record.departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobName != null">
+        job_name = #{record.jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postFunction != null">
+        post_function = #{record.postFunction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update department
+    set job_id = #{record.jobId,jdbcType=INTEGER},
+      department_id = #{record.departmentId,jdbcType=INTEGER},
+      department_name = #{record.departmentName,jdbcType=VARCHAR},
+      job_name = #{record.jobName,jdbcType=VARCHAR},
+      post_function = #{record.postFunction,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zmh.oaweb.model.Department">
+    update department
+    <set>
+      <if test="departmentName != null">
+        department_name = #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobName != null">
+        job_name = #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="postFunction != null">
+        post_function = #{postFunction,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where job_id = #{jobId,jdbcType=INTEGER}
+      and department_id = #{departmentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zmh.oaweb.model.Department">
+    update department
+    set department_name = #{departmentName,jdbcType=VARCHAR},
+      job_name = #{jobName,jdbcType=VARCHAR},
+      post_function = #{postFunction,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where job_id = #{jobId,jdbcType=INTEGER}
+      and department_id = #{departmentId,jdbcType=INTEGER}
+  </update>
+</mapper>

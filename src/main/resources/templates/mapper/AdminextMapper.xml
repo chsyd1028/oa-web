@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zmh.oaweb.mapper.AdminextMapper">
+  <resultMap id="BaseResultMap" type="com.zmh.oaweb.model.Adminext">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="department_id" jdbcType="INTEGER" property="departmentId" />
+    <result column="admin_id" jdbcType="INTEGER" property="adminId" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="idcard_number" jdbcType="VARCHAR" property="idcardNumber" />
+    <result column="birthday" jdbcType="DATE" property="birthday" />
+    <result column="age" jdbcType="SMALLINT" property="age" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="qq" jdbcType="VARCHAR" property="qq" />
+    <result column="job_id" jdbcType="INTEGER" property="jobId" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="employee_number" jdbcType="VARCHAR" property="employeeNumber" />
+    <result column="storeadmin_status" jdbcType="BIT" property="storeadminStatus" />
+    <result column="is_del" jdbcType="BIT" property="isDel" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zmh.oaweb.model.Adminext">
+    <result column="memo" jdbcType="LONGVARCHAR" property="memo" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, department_id, admin_id, mobile, name, sex, idcard_number, birthday, age, email, 
+    qq, job_id, address, employee_number, storeadmin_status, is_del, create_time, update_time
+  </sql>
+  <sql id="Blob_Column_List">
+    memo
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.zmh.oaweb.model.AdminextExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from adminext
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.zmh.oaweb.model.AdminextExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from adminext
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from adminext
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from adminext
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zmh.oaweb.model.AdminextExample">
+    delete from adminext
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zmh.oaweb.model.Adminext">
+    <selectKey keyProperty="adminId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into adminext (id, department_id, mobile, 
+      name, sex, idcard_number, 
+      birthday, age, email, 
+      qq, job_id, address, 
+      employee_number, storeadmin_status, is_del, 
+      create_time, update_time, memo
+      )
+    values (#{id,jdbcType=INTEGER}, #{departmentId,jdbcType=INTEGER}, #{mobile,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, #{idcardNumber,jdbcType=VARCHAR}, 
+      #{birthday,jdbcType=DATE}, #{age,jdbcType=SMALLINT}, #{email,jdbcType=VARCHAR}, 
+      #{qq,jdbcType=VARCHAR}, #{jobId,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, 
+      #{employeeNumber,jdbcType=VARCHAR}, #{storeadminStatus,jdbcType=BIT}, #{isDel,jdbcType=BIT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{memo,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zmh.oaweb.model.Adminext">
+    <selectKey keyProperty="adminId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into adminext
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="departmentId != null">
+        department_id,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="idcardNumber != null">
+        idcard_number,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="qq != null">
+        qq,
+      </if>
+      <if test="jobId != null">
+        job_id,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="employeeNumber != null">
+        employee_number,
+      </if>
+      <if test="storeadminStatus != null">
+        storeadmin_status,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="memo != null">
+        memo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="departmentId != null">
+        #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="idcardNumber != null">
+        #{idcardNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=SMALLINT},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null">
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="jobId != null">
+        #{jobId,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeNumber != null">
+        #{employeeNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="storeadminStatus != null">
+        #{storeadminStatus,jdbcType=BIT},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zmh.oaweb.model.AdminextExample" resultType="java.lang.Long">
+    select count(*) from adminext
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update adminext
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.departmentId != null">
+        department_id = #{record.departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminId != null">
+        admin_id = #{record.adminId,jdbcType=INTEGER},
+      </if>
+      <if test="record.mobile != null">
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=INTEGER},
+      </if>
+      <if test="record.idcardNumber != null">
+        idcard_number = #{record.idcardNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birthday != null">
+        birthday = #{record.birthday,jdbcType=DATE},
+      </if>
+      <if test="record.age != null">
+        age = #{record.age,jdbcType=SMALLINT},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qq != null">
+        qq = #{record.qq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobId != null">
+        job_id = #{record.jobId,jdbcType=INTEGER},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeNumber != null">
+        employee_number = #{record.employeeNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storeadminStatus != null">
+        storeadmin_status = #{record.storeadminStatus,jdbcType=BIT},
+      </if>
+      <if test="record.isDel != null">
+        is_del = #{record.isDel,jdbcType=BIT},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.memo != null">
+        memo = #{record.memo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update adminext
+    set id = #{record.id,jdbcType=INTEGER},
+      department_id = #{record.departmentId,jdbcType=INTEGER},
+      admin_id = #{record.adminId,jdbcType=INTEGER},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=INTEGER},
+      idcard_number = #{record.idcardNumber,jdbcType=VARCHAR},
+      birthday = #{record.birthday,jdbcType=DATE},
+      age = #{record.age,jdbcType=SMALLINT},
+      email = #{record.email,jdbcType=VARCHAR},
+      qq = #{record.qq,jdbcType=VARCHAR},
+      job_id = #{record.jobId,jdbcType=INTEGER},
+      address = #{record.address,jdbcType=VARCHAR},
+      employee_number = #{record.employeeNumber,jdbcType=VARCHAR},
+      storeadmin_status = #{record.storeadminStatus,jdbcType=BIT},
+      is_del = #{record.isDel,jdbcType=BIT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      memo = #{record.memo,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update adminext
+    set id = #{record.id,jdbcType=INTEGER},
+      department_id = #{record.departmentId,jdbcType=INTEGER},
+      admin_id = #{record.adminId,jdbcType=INTEGER},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=INTEGER},
+      idcard_number = #{record.idcardNumber,jdbcType=VARCHAR},
+      birthday = #{record.birthday,jdbcType=DATE},
+      age = #{record.age,jdbcType=SMALLINT},
+      email = #{record.email,jdbcType=VARCHAR},
+      qq = #{record.qq,jdbcType=VARCHAR},
+      job_id = #{record.jobId,jdbcType=INTEGER},
+      address = #{record.address,jdbcType=VARCHAR},
+      employee_number = #{record.employeeNumber,jdbcType=VARCHAR},
+      storeadmin_status = #{record.storeadminStatus,jdbcType=BIT},
+      is_del = #{record.isDel,jdbcType=BIT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zmh.oaweb.model.Adminext">
+    update adminext
+    <set>
+      <if test="departmentId != null">
+        department_id = #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="adminId != null">
+        admin_id = #{adminId,jdbcType=INTEGER},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="idcardNumber != null">
+        idcard_number = #{idcardNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=SMALLINT},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null">
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="jobId != null">
+        job_id = #{jobId,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeNumber != null">
+        employee_number = #{employeeNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="storeadminStatus != null">
+        storeadmin_status = #{storeadminStatus,jdbcType=BIT},
+      </if>
+      <if test="isDel != null">
+        is_del = #{isDel,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zmh.oaweb.model.Adminext">
+    update adminext
+    set department_id = #{departmentId,jdbcType=INTEGER},
+      admin_id = #{adminId,jdbcType=INTEGER},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      idcard_number = #{idcardNumber,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=DATE},
+      age = #{age,jdbcType=SMALLINT},
+      email = #{email,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
+      job_id = #{jobId,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      employee_number = #{employeeNumber,jdbcType=VARCHAR},
+      storeadmin_status = #{storeadminStatus,jdbcType=BIT},
+      is_del = #{isDel,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      memo = #{memo,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zmh.oaweb.model.Adminext">
+    update adminext
+    set department_id = #{departmentId,jdbcType=INTEGER},
+      admin_id = #{adminId,jdbcType=INTEGER},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      idcard_number = #{idcardNumber,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=DATE},
+      age = #{age,jdbcType=SMALLINT},
+      email = #{email,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
+      job_id = #{jobId,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      employee_number = #{employeeNumber,jdbcType=VARCHAR},
+      storeadmin_status = #{storeadminStatus,jdbcType=BIT},
+      is_del = #{isDel,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
