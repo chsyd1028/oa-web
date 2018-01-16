@@ -189,7 +189,7 @@ body.withmenucoll2 { background-position: 35px 0; } /* with menu style 2 in coll
 	border-radius: 0 0 2px 0; background: url(../images/default/searchbutton.png) no-repeat 0 0; width: 38px; height: 37px; vertical-align: middle;
 }
 
-.topheader .right { position: absolute; top: 0px; right: 50px; }
+.topheader .right { position: absolute; top: 20px; right: 50px; }
 .topheader .right span {
 	color: #ffffff;}
 
