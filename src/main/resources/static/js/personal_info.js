@@ -20,7 +20,7 @@ function getAdmin() {
 function getInfo() {
     jQuery.ajax({
         type: "POST",
-        url: "/personal/info",
+        url: "/oa/personal/info",
         //data: {username:$("#username").val(), content:$("#content").val()},
         //dataType: "json",
         success: function(result){
@@ -32,7 +32,7 @@ function getInfo() {
 function getDepartmentInfo() {
     jQuery.ajax({
         type: "POST",
-        url: "/personal/departmentInfo",
+        url: "/oa/personal/departmentInfo",
         //data: {username:$("#username").val(), content:$("#content").val()},
         //dataType: "json",
         success: function(result){
